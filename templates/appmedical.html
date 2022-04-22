@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Form Page 2 of 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Application Form Page 2/3</h1>
+        <h2>Medical History</h2>
+        <form action="#" method="POST">
+            <div id="medication"></div>
+            <button id="add_medication" type="button">Add medication</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_medication = 0;
+                $("#add_medication").on("click", function(){
+                    count_medication += 1;
+                    $("<input/>").attr({ type: "text", placeholder: "Enter medication #"+count_medication+" name", name: "med_"+count_medication}).appendTo("#medication").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter medication #"+count_medication+" reason", name: "reason_"+count_medication}).appendTo("#medication").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>

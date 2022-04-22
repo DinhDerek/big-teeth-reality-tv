@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background Check Form Page 3 of 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Background Check Form Page 3/4</h1>
+        <h2>Education History</h2>
+        <form action="#" method="POST">
+            <div id="education"></div>
+            <button id="add_education" type="button">Add education</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_education = 0;
+                $("#add_education").on("click", function(){
+                    count_education += 1;
+                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s name", name: "edu_"+count_education}).appendTo("#education").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s contact number", name: "phone_"+count_education}).appendTo("#education").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s degree received", name: "degree_"+count_education}).appendTo("#education").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s comments", name: "comments_"+count_education}).appendTo("#education").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>

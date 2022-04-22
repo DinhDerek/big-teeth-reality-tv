@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Add a task for the event</h1>
+        <h2>Task Form</h2>
+        <form action="#" method="POST">
+            <p>Task Name <input type="text" name="task_name" /></p>
+            <p>Task Prize <input type="text" name="prize" /></p>
+            <div><input type="number" placeholder="Enter ID of contestant #1" name="contestant_1" /></div>
+            <div><input type="text" placeholder="Enter result of contestant #1" name="result_1" /></div>
+            <div><input type="number" placeholder="Enter points earned by contestant #1" name="points_1" /></div>
+            <div id="contestants"></div>
+            <button id="add_contestant" type="button">Add another contestant</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_contestant = 1;
+                $("#add_contestant").on("click", function(){
+                    count_contestant += 1;
+                    $("<input/>").attr({ type: "number", placeholder: "Enter ID of contestant # "+count_contestant, name: "contestant_"+count_contestant}).appendTo("#contestants").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter result of contestant # "+count_contestant, name: "result_"+count_contestant}).appendTo("#contestants").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "number", placeholder: "Enter points earned by contestant #"+count_contestant, name: "points_"+count_contestant, min: "0", max: "100"}).appendTo("#contestants").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>

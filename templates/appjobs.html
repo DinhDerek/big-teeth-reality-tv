@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Form Page 3 of 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Application Form Page 3/3</h1>
+        <h2>Job History</h2>
+        <form action="#" method="POST">
+            <div id="jobs"></div>
+            <button id="add_job" type="button">Add job</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_job = 0;
+                $("#add_job").on("click", function(){
+                    count_job += 1;
+                    $("<input/>").attr({ type: "text", placeholder: "Enter job #"+count_job+" name", name: "job_"+count_job}).appendTo("#jobs").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "date", placeholder: "Enter start date for job #"+count_job, name: "start_"+count_job}).appendTo("#jobs").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "date", placeholder: "Enter end date for job #"+count_job, name: "end_"+count_job}).appendTo("#jobs").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter job description for job #"+count_job, name: "desc_"+count_job}).appendTo("#jobs").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>

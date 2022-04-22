@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background Check Form Page 2 of 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Background Check Form Page 2/4</h1>
+        <h2>Employer History</h2>
+        <form action="#" method="POST">
+            <div id="employers"></div>
+            <button id="add_emp" type="button">Add employer</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_emp = 0;
+                $("#add_emp").on("click", function(){
+                    count_emp += 1;
+                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s name", name: "emp_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s phone number", name: "phone_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s comments", name: "comments_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>

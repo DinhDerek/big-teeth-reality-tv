@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add voting's votes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <h1>Add votes for a voting</h1>
+        <h2>Votes Form</h2>
+        <form action="#" method="POST">
+            <p>Contestant ID <input type="number" name="app_id" /></p>
+            <p>Task Prize <input type="text" name="prize" /></p>
+            <div><input type="text" placeholder="Enter the city for voting entry #1" name="city_1" /></div>
+            <div><input type="text" placeholder="Enter the state for voting entry #1" name="state_1" /></div>
+            <div><input type="text" placeholder="Enter the country for voting entry #1" name="country_1" /></div>
+            <div><input type="text" placeholder="Enter the method of voting for voting entry #1" name="method_1" /></div>
+            <div><input type="number" placeholder="Enter the total number of votes for voting entry #1" name="total_1" /></div>
+            <div id="votes"></div>
+            <button id="add_votes" type="button">Add another voting entry</button>
+            <p><input type="submit" value="submit" /></p>
+        </form>
+        <script>
+            $(document).ready(function(){
+                var count_voting = 1;
+                $("#add_voting").on("click", function(){
+                    count_voting += 1;
+                    $("<input/>").attr({ type: "text", placeholder: "Enter the city for voting entry #"+count_voting, name: "city_"+count_voting}).appendTo("#votes").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter the state for voting entry "+count_voting, name: "state_"+count_voting}).appendTo("#votes").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter the country for voting entry "+count_voting, name: "country_"+count_voting}).appendTo("#votes").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "text", placeholder: "Enter the method of voting for voting entry #"+count_voting, name: "method_"+count_voting}).appendTo("#votes").wrap($("<div/>"));
+                    $("<input/>").attr({ type: "number", placeholder: "Enter the total number of votes for voting entry #"+count_voting, name: "total_"+count_voting}).appendTo("#votes").wrap($("<div/>"));
+                });
+            })
+        </script>
+    </body>
+</html>
