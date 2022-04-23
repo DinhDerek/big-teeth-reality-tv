@@ -1,5 +1,8 @@
 
 
+import json
+
+
 class DBTool:
     def __init__(self, cursor):
         self.cursor = cursor
@@ -202,6 +205,7 @@ class DBTool:
                 self.cursor.execute("SELECT region_id FROM region WHERE city LIKE %s AND state LIKE %s AND country LIKE %s", region_data)
                 result = self.cursor.fetchone()
                 if result == None:
+                    self.cursor.execute("ALTER TABLE region AUTO_INCREMENT=1")
                     self.cursor.execute("INSERT INTO region (city, state, country) VALUES (%s, %s, %s)", region_data)
                     region_id = self.cursor.lastrowid
                 else:
@@ -273,3 +277,124 @@ class DBTool:
         result = self.cursor.fetchone()
         if result != None:
             self.cursor.execute("DELETE FROM applicant_records where app_id = %s", [app_id])
+
+    def view_episode(self, episode_info):
+        return_dict = {"episode_title": episode_info["episode_title"].upper(), "air_date": episode_info["air_date"]}
+
+        self.cursor.execute("SELECT episode_id, producer, director FROM episode WHERE title = %s AND air_date = %s", [episode_info["episode_title"].upper(), episode_info["air_date"]])
+        result = self.cursor.fetchone()
+        if result == None:
+            return_dict["found"] = "false"
+            return return_dict
+        else:
+            return_dict["producer"] = result[1]
+            return_dict["director"] = result[2]
+            return_dict["episode_actions"] = self.view_episode_actions(result[0])
+            return_dict["episode_events"] = self.view_episode_events(result[0])
+            return_dict["found"] = "true"
+            return return_dict
+
+    def view_episode_actions(self, episode_id):
+        self.cursor.execute("SELECT seq, description, cameras, estimated_time FROM episode_actions WHERE episode_id = %s", [episode_id])
+        result_list = []
+        query_results = self.cursor.fetchall()
+        for result in query_results:
+            temp_dict = {}
+            temp_dict["seq"] = result[0]
+            temp_dict["desc"] = result[1]
+            temp_dict["cameras"] = result[2]
+            temp_dict["estimated_time"] = result[3]
+            result_list.append(temp_dict)
+        return result_list
+
+    def view_episode_events(self, episode_id):
+        self.cursor.execute("SELECT event_id, title, description, estimated_time, estimated_danger FROM event WHERE episode_id = %s", [episode_id])
+        result_list = []
+        query_results = self.cursor.fetchall()
+        for result in query_results:
+            temp_dict = {}
+            temp_dict["title"] = result[1]
+            temp_dict["description"] = result[2]
+            temp_dict["estimated_time"] = result[3]
+            temp_dict["estimated_danger"] = result[4]
+            temp_dict["tasks"] = self.view_event_tasks(result[0])
+            result_list.append(temp_dict)
+        return result_list
+
+    def view_event_tasks(self, event_id):
+        self.cursor.execute("SELECT task_id, name, prize FROM event_tasks WHERE event_id = %s", [event_id])
+        result_list = []
+        query_results = self.cursor.fetchall()
+        for result in query_results:
+            temp_dict = {}
+            temp_dict["name"] = result[1]
+            temp_dict["prize"] = result[2]
+            temp_dict["contestants"] = self.view_task_contestants(result[0])
+            result_list.append(temp_dict)
+        return result_list
+
+    def view_task_contestants(self, task_id):
+        self.cursor.execute("SELECT a.first_name, a.last_name, t.result, t.points FROM application a INNER JOIN task_contestants t ON t.app_id = a.app_id WHERE t.task_id = %s", [task_id])
+        result_list = []
+        query_results = self.cursor.fetchall()
+        for result in query_results:
+            temp_dict = {}
+            temp_dict["name"] = result[0] + " " + result[1]
+            temp_dict["result"] = result[2]
+            temp_dict["points"] = result[3]
+            result_list.append(temp_dict)
+        return result_list
+
+    def view_med(self, app_id):
+        return_dict = {"app_id": app_id}
+
+        self.cursor.execute("SELECT a.first_name, a.last_name, a.dob, a.gender, m.medication_name, am.reason FROM applicant_medication am INNER JOIN application a ON am.app_id=a.app_id INNER JOIN medication m ON am.medication_id=m.medication_id WHERE am.app_id=%s", [app_id])
+        query_results = self.cursor.fetchall()
+        if len(query_results) == 0:
+            return_dict["found"] = "false"
+            return return_dict
+        else:
+            return_dict["name"] = query_results[0][0] + " " + query_results[0][1]
+            return_dict["dob"] = query_results[0][2].strftime("%m/%d/%Y")
+            return_dict["gender"] = query_results[0][3]
+            result_list = []
+            for result in query_results:
+                temp_dict = {}
+                temp_dict["medication_name"] = result[4]
+                temp_dict["reason"] = result[5]
+                result_list.append(temp_dict)
+            return_dict["medication"] = result_list
+            print(return_dict)
+            return return_dict
+
+    def view_job(self):
+        self.cursor.execute("SELECT job_title from jobs")
+        query_results = self.cursor.fetchall()
+        if len(query_results) == 0:
+            return []
+        else:
+            return_list = []
+            for result in query_results:
+                return_list.append({"job_title": result[0]})
+            return return_list
+
+    def view_voting(self, voting_info):
+        return_dict = {"app_id": voting_info["app_id"], "episode_title": voting_info["episode_title"].upper(), "air_date": voting_info["air_date"]}
+
+        self.cursor.execute("SELECT * FROM episode WHERE title=%s AND air_date=%s", [voting_info["episode_title"], voting_info["air_date"]])
+        results = self.cursor.fetchone()
+        if results == None:
+            return_dict["found"] = "episode"
+            return return_dict
+
+        self.cursor.execute("SELECT * FROM application WHERE app_id=%s", [voting_info["app_id"]])
+        results = self.cursor.fetchone()
+        if results == None:
+            return_dict["found"] = "contestant"
+            return return_dict
+
+        self.cursor.execute("SELECT a.first_name, a.last_name, SUM(vc.votes) FROM application a INNER JOIN voting_contestants vc ON a.app_id=vc.app_id INNER JOIN voting v ON vc.voting_id=v.voting_id INNER JOIN episode e ON v.episode_id=e.episode_id WHERE e.title=%s AND e.air_date=%s", [voting_info["episode_title"], voting_info["air_date"]])
+        query_results = self.cursor.fetchone()
+        return_dict["name"] = query_results[0] + " " + query_results[1]
+        return_dict["votes"] = query_results[2]
+        return return_dict

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <title>View Episode Information</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+    <body>
+        <div class = "panel-app-header">
+            <h1>View Episode Information Form Page</h1>
+            <h2>Enter the title of the episode and the date it aired</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-general">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <p>Episode Title <input type="text" name="episode_title" /></p>
+                        <p>Air Date <input type="date" name="air_date" /></p>
+                        <p><input class="submit" name="submit" type="submit" value="Submit" /></p>
+                        <p><input class="back" name="back" type="submit" value="Back" /></p> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

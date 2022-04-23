@@ -20,6 +20,19 @@ def home():
             return redirect(url_for('episodeinformation'))
         elif "votingform" in request.form:
             return redirect(url_for('votingstart'))
+        elif "viewepform" in request.form:
+            return redirect(url_for('viewepinfo'))
+        elif "viewmedform" in request.form:
+            return redirect(url_for('viewmedinfo'))
+        elif "viewjobform" in request.form:
+            job_info = db_tool.view_job()
+            if len(job_info) == 0:
+                return redirect(url_for('viewjobinfosecondary'))
+            else:
+                session["job_info"] = job_info
+                return redirect(url_for('viewjobinforesults'))
+        elif "viewvoteform" in request.form:
+            return redirect(url_for('viewvotinginfo'))
         elif "deleteappform" in request.form:
             return redirect(url_for('deletegetappid'))
     else:
@@ -197,6 +210,87 @@ def deletegetappid():
 @app.route('/delete-get-app-id-secondary', methods =["GET", "POST"])
 def deletegetappidsecondary():
     return render_template("deletegetappidsecondary.html", data={"deleted": session["delete_app_result"], "app_id": session["app_id"]})
+
+@app.route('/view-ep-info', methods =["GET", "POST"])
+def viewepinfo():
+    if request.method == "POST":
+        if "submit" in request.form:
+            session["episode_info"] = db_tool.view_episode(request.form)
+            return redirect(url_for('viewepinfosecondary'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
+    else:
+        return render_template("viewepinfo.html")
+
+@app.route('/view-ep-info-secondary', methods =["GET", "POST"])
+def viewepinfosecondary():
+    return render_template("viewepinfosecondary.html", data=session["episode_info"])
+
+@app.route('/view-ep-info-results', methods =["GET", "POST"])
+def viewepinforesults():
+    if request.method == "POST":
+        if "back" in request.form:
+            return redirect(url_for('viewepinfo'))
+    else:
+        return render_template("viewepinforesults.html", data=session["episode_info"])
+
+@app.route('/view-med-info', methods =["GET", "POST"])
+def viewmedinfo():
+    if request.method == "POST":
+        if "submit" in request.form:
+            session["med_info"] = db_tool.view_med(request.form["app_id"])
+            return redirect(url_for('viewmedinfosecondary'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
+    else:
+        return render_template("viewmedinfo.html")
+
+@app.route('/view-med-info-secondary', methods =["GET", "POST"])
+def viewmedinfosecondary():
+    return render_template("viewmedinfosecondary.html", data=session["med_info"])
+
+@app.route('/view-med-info-results', methods =["GET", "POST"])
+def viewmedinforesults():
+    if request.method == "POST":
+        if "back" in request.form:
+            return redirect(url_for('viewmedinfo'))
+    else:
+        return render_template("viewmedinforesults.html", data=session["med_info"])
+
+@app.route('/view-job-info-secondary', methods =["GET", "POST"])
+def viewjobinfosecondary():
+    return render_template("viewjobinfosecondary.html")
+
+@app.route('/view-job-info-results', methods =["GET", "POST"])
+def viewjobinforesults():
+    if request.method == "POST":
+        if "back" in request.form:
+            return redirect(url_for('home'))
+    else:
+        return render_template("viewjobinforesults.html", data=session["job_info"])
+
+@app.route('/view-voting-info', methods =["GET", "POST"])
+def viewvotinginfo():
+    if request.method == "POST":
+        if "submit" in request.form:
+            session["voting_info"] = db_tool.view_voting(request.form)
+            return redirect(url_for('viewvotinginfosecondary'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
+    else:
+        return render_template("viewvotinginfo.html")
+
+@app.route('/view-voting-info-secondary', methods =["GET", "POST"])
+def viewvotinginfosecondary():
+    return render_template("viewvotinginfosecondary.html", data=session["voting_info"])
+
+@app.route('/view-voting-info-results', methods =["GET", "POST"])
+def viewvotinginforesults():
+    if request.method == "POST":
+        if "back" in request.form:
+            return redirect(url_for('viewvotinginfo'))
+    else:
+        return render_template("viewvotinginforesults.html", data=session["voting_info"])
 
 if __name__ == "__main__":
     app.run()

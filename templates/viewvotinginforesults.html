@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <title>Contestant's Voting Results</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var voting_info = {{ data | tojson }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/viewvotingresults.js') }}"></script>
+</head>
+    <body>
+        <div class = "panel-job-header", id="header">
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-episode">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <div id="general"></div>
+                        <div id="actions"></div>
+                        <div id="events"></div>
+                        <p><input class="back" name="back" type="submit" value="Back" /></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

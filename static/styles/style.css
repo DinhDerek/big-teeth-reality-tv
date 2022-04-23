@@ -60,11 +60,27 @@ input[type=date] {
     padding: 0 20px;
 }
 
+.panel-job-header {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 500px;
+    padding: 0 20px;
+}
+
 .panel-app-general {
     background-color: white;
     margin: auto;
     border-radius: 22px;
     width: 360px;
+    padding: 5px 20px 40px 20px;
+}
+
+.panel-app-episode {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 500px;
     padding: 5px 20px 40px 20px;
 }
 
@@ -111,6 +127,18 @@ input[type=date] {
     float: left;
 }
 
+.form_div h3 {
+    text-align: left;
+}
+
+.form_div h4 {
+    text-align: left;
+}
+
+.form_div h5 {
+    text-align: left;
+}
+
 button {
     padding:5px 15px; 
     background:#ccc; 
@@ -123,4 +151,9 @@ button {
 
 .line{
     border:2px solid #ccc;
+    }
+
+.event_line{
+    border:2px solid #f0f0f0;
+    margin: 0 25%;
     }
