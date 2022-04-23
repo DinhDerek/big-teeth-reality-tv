@@ -20,14 +20,19 @@ def home():
             return redirect(url_for('episodeinformation'))
         elif "votingform" in request.form:
             return redirect(url_for('votingstart'))
+        elif "deleteappform" in request.form:
+            return redirect(url_for('deletegetappid'))
     else:
         return render_template("index.html")
 
 @app.route('/application-form-general', methods =["GET", "POST"])
 def appgeneral():
     if request.method == "POST":
-        session["app_id"] = db_tool.insert_application(request.form)
-        return redirect(url_for('appmedical'))
+        if "submit" in request.form:
+            session["app_id"] = db_tool.insert_application(request.form)
+            return redirect(url_for('appmedical'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
     else:
         return render_template("appgeneral.html")
 
@@ -51,9 +56,12 @@ def appjobs():
 @app.route('/background-form-basic', methods =["GET", "POST"])
 def backgroundbasic():
     if request.method == "POST":
-        session["app_id"] = request.form["app_id"]
-        db_tool.insert_background(request.form)
-        return redirect(url_for('backgroundemployer'))
+        if "submit" in request.form:
+            session["app_id"] = request.form["app_id"]
+            db_tool.insert_background(request.form)
+            return redirect(url_for('backgroundemployer'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
     else:
         return render_template("backgroundbasic.html")
 
@@ -85,8 +93,11 @@ def backgroundrecords():
 @app.route('/episode-information', methods =["GET", "POST"])
 def episodeinformation():
     if request.method == "POST":
-        session["episode_id"] = db_tool.insert_episode(request.form)
-        return redirect(url_for('episodeactions'))
+        if "submit" in request.form:
+            session["episode_id"] = db_tool.insert_episode(request.form)
+            return redirect(url_for('episodeactions'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
     else:
         return render_template("episodeinformation.html")
 
@@ -168,7 +179,24 @@ def votingmainpage():
             db.commit()
             return redirect(url_for('home'))
     else:
-        return render_template("votingmain.html")
+        return render_template("votingmain.html", data={"episode_id": session["episode_id"]})
+
+@app.route('/delete-get-app-id', methods =["GET", "POST"])
+def deletegetappid():
+    if request.method == "POST":
+        if "submit" in request.form:
+            session["delete_app_result"] = db_tool.delete_applicant(request.form["app_id"])
+            session["app_id"] = request.form["app_id"]
+            db.commit()
+            return redirect(url_for('deletegetappidsecondary'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
+    else:
+        return render_template("deletegetappid.html")
+
+@app.route('/delete-get-app-id-secondary', methods =["GET", "POST"])
+def deletegetappidsecondary():
+    return render_template("deletegetappidsecondary.html", data={"deleted": session["delete_app_result"], "app_id": session["app_id"]})
 
 if __name__ == "__main__":
     app.run()

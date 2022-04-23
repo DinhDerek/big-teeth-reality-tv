@@ -208,3 +208,68 @@ class DBTool:
                     region_id = result[0]
                 voting_contestant_data = [voting_id, voting_info["app_id"], region_id, voting_info["method_" + str(i)].upper(), voting_info["total_" + str(i)]]
                 self.cursor.execute("INSERT INTO voting_contestants (voting_id, app_id, region_id, method, votes) VALUES (%s, %s, %s, %s, %s)", voting_contestant_data)
+
+    def delete_applicant(self, app_id):
+        self.cursor.execute("SELECT * FROM application where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result == None:
+            return "false"
+        else:
+            self.delete_voting_contestant(app_id)
+            self.delete_task_contestant(app_id)
+            self.delete_background_contestant(app_id)
+            self.delete_education_contestant(app_id)
+            self.delete_employer_contestant(app_id)
+            self.delete_job_contestant(app_id)
+            self.delete_medication_contestant(app_id)
+            self.delete_records_contestant(app_id)
+            self.cursor.execute("DELETE FROM application where app_id = %s", [app_id])
+            return "true"
+    
+    def delete_voting_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM voting_contestants where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM voting_contestants where app_id = %s", [app_id])
+
+    def delete_task_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM task_contestants where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM task_contestants where app_id = %s", [app_id])
+    
+    def delete_background_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM background_check where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM background_check where app_id = %s", [app_id])
+    
+    def delete_education_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM applicant_education where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM applicant_education where app_id = %s", [app_id])
+    
+    def delete_medication_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM applicant_medication where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM applicant_medication where app_id = %s", [app_id])
+    
+    def delete_employer_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM applicant_employer where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM applicant_employer where app_id = %s", [app_id])
+    
+    def delete_job_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM applicant_jobs where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM applicant_jobs where app_id = %s", [app_id])
+    
+    def delete_records_contestant(self, app_id):
+        self.cursor.execute("SELECT * FROM applicant_records where app_id = %s", [app_id])
+        result = self.cursor.fetchone()
+        if result != None:
+            self.cursor.execute("DELETE FROM applicant_records where app_id = %s", [app_id])
