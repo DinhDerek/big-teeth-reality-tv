@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Application Form Page 2 of 3</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
-        <h1>Application Form Page 2/3</h1>
-        <h2>Medical History</h2>
-        <form action="#" method="POST">
-            <div id="medication"></div>
-            <button id="add_medication" type="button">Add medication</button>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Application Form Page 2/3</h1>
+            <h2>Medical History</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app">
+                <form action="#" method="POST">
+                    <div class="form_div" id="medication"></div>
+                    <button id="add_medication" type="button">Add medication</button>
+                    <p><input type="submit" value="Submit" /></p>
+                </form>
+            </div>
+        </div>
         <script>
             $(document).ready(function(){
                 var count_medication = 0;
                 $("#add_medication").on("click", function(){
                     count_medication += 1;
-                    $("<input/>").attr({ type: "text", placeholder: "Enter medication #"+count_medication+" name", name: "med_"+count_medication}).appendTo("#medication").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter medication #"+count_medication+" reason", name: "reason_"+count_medication}).appendTo("#medication").wrap($("<div/>"));
+                    if (count_medication > 1) {
+                        $("<div/>").attr({class: "line"}).appendTo("#medication");
+                    }
+                    $("<input/>").attr({ type: "text", name: "med_"+count_medication}).appendTo("#medication").wrap($("<p>Enter the name of medication #"+count_medication+"<p/>"));
+                    $("<input/>").attr({ type: "text", name: "reason_"+count_medication}).appendTo("#medication").wrap($("<p>Enter the reason for medication #"+count_medication+"<p/>"));  
                 });
             })
         </script>

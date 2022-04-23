@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Task Main Page</title>
 </head>
     <body>
-        <form action="#" method="POST">
-            <p><input type="submit" name="taskform" value="Add another task" /></p>
-            <p><input type="submit" name="backtoeventform" value="Finish" /></p>
-        </form>
-        
+        <div class = "panel-app-header">
+            <h1>Task Page</h1>
+            <h2>Add another task or "Finish" to return to the event page</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel">
+                <form action="#" method="POST">
+                    <p><input type="submit" name="taskform" value="Add another task" /></p>
+                    <p><input type="submit" name="backtoeventform" value="Finish" /></p>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

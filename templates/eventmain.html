@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Event Main Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var episode_id = {{ data.episode_id }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/eventmain.js') }}"></script>
 </head>
     <body>
-        <form action="#" method="POST">
-            <p><input type="submit" name="eventform" value="Add another event" /></p>
-            <p><input type="submit" name="finishform" value="Finish" /></p>
-        </form>
-        
+        <div class = "panel-app-header">
+            <h1>Task Page</h1>
+            <h2>Add another event or "Finish" to complete the episode form</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel">
+                <form action="#" method="POST">
+                    <p><input type="submit" name="eventform" value="Add another event" /></p>
+                    <p><input type="submit" name="finishform" value="Finish" onclick="confirmationDialogue()" /></p>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

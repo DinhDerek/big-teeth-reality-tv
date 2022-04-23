@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Background Check Form Page 2 of 4</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
-        <h1>Background Check Form Page 2/4</h1>
-        <h2>Employer History</h2>
-        <form action="#" method="POST">
-            <div id="employers"></div>
-            <button id="add_emp" type="button">Add employer</button>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Background Check Form Page 2/4</h1>
+            <h2>Employer History</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app">
+                <form action="#" method="POST">
+                    <div class="form_div" id="employers"></div>
+                    <button id="add_emp" type="button">Add employer</button>
+                    <p><input type="submit" value="Submit" /></p>
+                </form>
+            </div>
+        </div>
         <script>
             $(document).ready(function(){
                 var count_emp = 0;
                 $("#add_emp").on("click", function(){
                     count_emp += 1;
-                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s name", name: "emp_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s phone number", name: "phone_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter employer #"+count_emp+"\'s comments", name: "comments_"+count_emp}).appendTo("#employers").wrap($("<div/>"));
+                    if (count_emp > 1) {
+                        $("<div/>").attr({class: "line"}).appendTo("#employers");
+                    }
+                    $("<input/>").attr({ type: "text", name: "emp_"+count_emp}).appendTo("#employers").wrap($("<p>Enter employer #"+count_emp+"\'s name<p/>"));
+                    $("<input/>").attr({ type: "text", name: "phone_"+count_emp}).appendTo("#employers").wrap($("<p>Enter employer #"+count_emp+"\'s phone number<p/>"));
+                    $("<input/>").attr({ type: "text", name: "comments_"+count_emp}).appendTo("#employers").wrap($("<p>Enter employer #"+count_emp+"\'s comments<p/>"));
                 });
             })
         </script>

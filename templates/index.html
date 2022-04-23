@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <title>Big Teeth Reality TV</title>
 </head>
     <body>
-        <form action="#" method="POST">
-            <p><input type="submit" name="appform" value="Enter applicant information" /></p>
-            <p><input type="submit" name="backgroundform" value="Enter applicant background check information" /></p>
-            <p><input type="submit" name="episodeform" value="Enter episode information" /></p>
-            <p><input type="submit" name="votingform" value="Enter voting information" /></p>
-        </form>
-        
+        <h1>Welcome to the Big Teeth Reality TV App!</h1>
+        <div class="panel-container">
+            <div class="panel">
+                <form action="#" method="POST">
+                    <h2>Data entry forms:</h2>
+                    <p><input type="submit" name="appform" value="Enter applicant information" /></p>
+                    <p><input type="submit" name="backgroundform" value="Enter applicant background check information" /></p>
+                    <p><input type="submit" name="episodeform" value="Enter episode information" /></p>
+                    <p><input type="submit" name="votingform" value="Enter voting information" /></p>
+                    <h2>Data retrieval forms:</h2>
+                </form>
+            </div>
+            <p>Designed by Derek Dinh for CPSC 531</p>
+        </div>
     </body>
 </html>

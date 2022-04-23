@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Voting form</title>
 </head>
     <body>
-        <h1>Voting form</h1>
-        <h2>Enter the episode information for the voting form</h2>
-        <form action="#" method="POST">
-            <p>Episode Title <input type="text" name="episode_title" /></p>
-            <p>Episode Air Date <input type="date" name="air_date" /></p>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Voting form</h1>
+            <h2>Enter the episode information for the voting form</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-general">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <p>Episode Title <input type="text" name="episode_title" /></p>
+                        <p>Episode Air Date <input type="date" name="air_date" /></p>
+                        <p><input type="submit" value="Submit" /></p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

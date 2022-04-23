@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Background Check Form Page 4 of 4</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var app_id = {{ data.app_id }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/backgroundrecords.js') }}"></script>
 </head>
     <body>
-        <h1>Background Check Form Page 4/4</h1>
-        <h2>Police and Judicial Records</h2>
-        <form action="#" method="POST">
-            <div id="records"></div>
-            <button id="add_record" type="button">Add record</button>
-            <p><input type="submit" value="submit" /></p>
-        </form>
-        <script>
-            $(document).ready(function(){
-                var count_record = 0;
-                $("#add_record").on("click", function(){
-                    count_record += 1;
-                    $("<input/>").attr({ type: "date", placeholder: "Enter date of record #"+count_record, name: "date_"+count_record}).appendTo("#records").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter category of record #"+count_record, name: "category_"+count_record}).appendTo("#records").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter description of record #"+count_record, name: "desc_"+count_record}).appendTo("#records").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter outcome of record #"+count_record, name: "outcome_"+count_record}).appendTo("#records").wrap($("<div/>"));
-                });
-            })
-        </script>
+        <div class = "panel-app-header">
+            <h1>Background Check Form Page 4/4</h1>
+            <h2>Police and Judicial Records</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app">
+                <form action="#" method="POST">
+                    <div class="form_div" id="records"></div>
+                    <button id="add_record" type="button">Add record</button>
+                    <p><input type="submit" value="Submit" onclick="confirmationDialogue()" /></p>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

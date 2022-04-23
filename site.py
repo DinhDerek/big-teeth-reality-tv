@@ -46,7 +46,7 @@ def appjobs():
         db.commit()
         return redirect(url_for('home'))
     else:
-        return render_template("appjobs.html")
+        return render_template("appjobs.html", data={"app_id": session["app_id"]})
 
 @app.route('/background-form-basic', methods =["GET", "POST"])
 def backgroundbasic():
@@ -80,7 +80,7 @@ def backgroundrecords():
         db.commit()
         return redirect(url_for('home'))
     else:
-        return render_template("backgroundrecords.html")
+        return render_template("backgroundrecords.html", data={"app_id": session["app_id"]})
 
 @app.route('/episode-information', methods =["GET", "POST"])
 def episodeinformation():
@@ -112,7 +112,7 @@ def taskstart():
         db_tool.insert_task(session["event_id"], request.form)
         return redirect(url_for('taskmainpage'))
     else:
-        return render_template("taskstart.html")
+        return render_template("taskstart.html", data={"event_id": session["event_id"]})
 
 @app.route('/task-main-page', methods =["GET", "POST"])
 def taskmainpage():
@@ -133,7 +133,7 @@ def eventmainpage():
             db.commit()
             return redirect(url_for('home'))
     else:
-        return render_template("eventmain.html")
+        return render_template("eventmain.html", data={"episode_id": session["episode_id"]})
 
 @app.route('/event-continue', methods =["GET", "POST"])
 def eventcontinue():
@@ -157,7 +157,7 @@ def votingcontestant():
         db_tool.insert_votingcontestant(session["voting_id"], request.form)
         return redirect(url_for('votingmainpage'))
     else:
-        return render_template("votingcontestant.html")
+        return render_template("votingcontestant.html", data={"episode_id": session["episode_id"]})
 
 @app.route('/voting-main-page', methods =["GET", "POST"])
 def votingmainpage():

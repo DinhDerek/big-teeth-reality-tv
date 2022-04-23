@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Episode Form</title>
 </head>
     <body>
-        <h1>Episode Form</h1>
-        <h2>Episode Information</h2>
-        <form action="#" method="POST">
-            <p>Episode Title <input type="text" name="episode_title" /></p>
-            <p>Episode Air Date <input type="date" name="air_date" /></p>
-            <p>Episode Producer <input type="text" name="producer" /></p>
-            <p>Episode Director <input type="text" name="director" /></p>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Episode Form</h1>
+            <h2>Episode Information</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-general">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <p>Episode Title <input type="text" name="episode_title" /></p>
+                        <p>Episode Air Date <input type="date" name="air_date" /></p>
+                        <p>Episode Producer <input type="text" name="producer" /></p>
+                        <p>Episode Director <input type="text" name="director" /></p>
+                        <p><input type="submit" value="Submit" /></p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

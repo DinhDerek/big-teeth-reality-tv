@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Background Check Form Page 1 of 4</title>
 </head>
     <body>
-        <h1>Background Check Form Page 1/4</h1>
-        <h2>Basic Information</h2>
-        <form action="#" method="POST">
-            <p>Applicant ID <input type="text" name="app_id" /></p>
-            <p>National ID <input type="text" name="national_id" /></p>
-            <p>Religion <input type="text" name="religion" /></p>
-            <p>Appearance Rating <input type="number" name="appearance_rating" min="0" max="10" /></p>
-            <p>Strength Rating <input type="number" name="strength_rating" min="0" max="10" /></p>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Background Check Form Page 1/4</h1>
+            <h2>Basic Information</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-general">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <p>Applicant ID <input type="text" name="app_id" /></p>
+                        <p>National ID <input type="text" name="national_id" /></p>
+                        <p>Religion <input type="text" name="religion" /></p>
+                        <p>Appearance Rating <input type="number" name="appearance_rating" min="0" max="10" /></p>
+                        <p>Strength Rating <input type="number" name="strength_rating" min="0" max="10" /></p>
+                        <p><input type="submit" value="Submit" /></p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

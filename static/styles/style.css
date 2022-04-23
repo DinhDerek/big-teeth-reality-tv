@@ -1,0 +1,122 @@
+body {
+    background-color:cornflowerblue;
+    font-family: Inter;
+    text-align: center;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 12px;
+    border-radius: 12px; 
+}
+
+input[type=text] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=number] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=email] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=date] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 140px;
+    text-align: center;
+}
+
+.panel {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 360px;
+    padding: 5px 15px;
+
+}
+
+.panel-app-header {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 360px;
+    padding: 0 20px;
+}
+
+.panel-app-general {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 360px;
+    padding: 5px 20px 40px 20px;
+}
+
+.panel-app {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 450px;
+    padding: 25px 20px 5px 20px;
+}
+
+.panel-ep {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 500px;
+    padding: 25px 20px 5px 20px;
+}
+
+.panel-task {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 500px;
+    padding: 25px 20px 45px 20px;
+}
+
+.panel-vote {
+    background-color: white;
+    margin: auto;
+    border-radius: 22px;
+    width: 550px;
+    padding: 25px 20px 45px 20px;
+}
+.form_div p {
+    text-align: left;
+}
+
+.form_div input {
+    float: right;
+}
+
+button {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 12px;
+    border-radius: 12px; 
+    text-align: right;
+}
+
+.line{
+    border:2px solid #ccc;
+    }

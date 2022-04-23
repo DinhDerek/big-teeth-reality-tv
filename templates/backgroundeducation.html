@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Background Check Form Page 3 of 4</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
-        <h1>Background Check Form Page 3/4</h1>
-        <h2>Education History</h2>
-        <form action="#" method="POST">
-            <div id="education"></div>
-            <button id="add_education" type="button">Add education</button>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Background Check Form Page 3/4</h1>
+            <h2>Education History</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app">
+                <form action="#" method="POST">
+                    <div  class="form_div" id="education"></div>
+                    <button id="add_education" type="button">Add school</button>
+                    <p><input type="submit" value="Submit" /></p>
+                </form>
+            </div>
+        </div>
         <script>
             $(document).ready(function(){
                 var count_education = 0;
                 $("#add_education").on("click", function(){
                     count_education += 1;
-                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s name", name: "edu_"+count_education}).appendTo("#education").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s contact number", name: "phone_"+count_education}).appendTo("#education").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s degree received", name: "degree_"+count_education}).appendTo("#education").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter education #"+count_education+"\'s comments", name: "comments_"+count_education}).appendTo("#education").wrap($("<div/>"));
+                    if (count_education > 1) {
+                        $("<div/>").attr({class: "line"}).appendTo("#education");
+                    }
+                    $("<input/>").attr({ type: "text", name: "edu_"+count_education}).appendTo("#education").wrap($("<p>Enter school #"+count_education+"\'s name<p/>"));
+                    $("<input/>").attr({ type: "text", name: "phone_"+count_education}).appendTo("#education").wrap($("<p>Enter school #"+count_education+"\'s contact number<p/>"));
+                    $("<input/>").attr({ type: "text", name: "degree_"+count_education}).appendTo("#education").wrap($("<p>Enter the degree received at school #"+count_education+"<p/>"));
+                    $("<input/>").attr({ type: "text", name: "comments_"+count_education}).appendTo("#education").wrap($("<p>Enter school #"+count_education+"\'s comments<p/>"));
                 });
             })
         </script>

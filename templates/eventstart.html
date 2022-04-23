@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Event form</title>
 </head>
     <body>
-        <h1>Add an event to the episode</h1>
-        <h2>Event Form</h2>
-        <form action="#" method="POST">
-            <p>Event Title <input type="text" name="event_title" /></p>
-            <p>Event Description <input type="text" name="desc" /></p>
-            <p>Estimated Time in Minutes<input type="number" name="est" min="0" max="60" /></p>
-            <p>Estimated Danger <input type="number" name="danger" min="0" max="10" /></p>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Add an event to the episode</h1>
+            <h2>Event Form</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-app-general">
+                <form action="#" method="POST">
+                    <div class="form_div">
+                        <p>Event Title <input type="text" name="event_title" /></p>
+                        <p>Event Description <input type="text" name="desc" /></p>
+                        <p>Estimated Time in Minutes<input type="number" name="est" min="0" max="60" /></p>
+                        <p>Estimated Danger <input type="number" name="danger" min="0" max="10" /></p>
+                        <p><input type="submit" value="Submit" /></p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

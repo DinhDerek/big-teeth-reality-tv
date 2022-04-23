@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <title>Event Actions Form</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
-        <h1>Event Actions Form</h1>
-        <h2>Event Actions</h2>
-        <form action="#" method="POST">
-            <div id="action"></div>
-            <button id="add_action" type="button">Add action</button>
-            <p><input type="submit" value="submit" /></p>
-        </form>
+        <div class = "panel-app-header">
+            <h1>Event Actions Form</h1>
+            <h2>Event Actions</h2>
+        </div>
+        <div class="panel-container">
+            <div class="panel-ep">
+                <form action="#" method="POST">
+                    <div class="form_div" id="action"></div>
+                    <button id="add_action" type="button">Add action</button>
+                    <p><input type="submit" value="Submit" /></p>
+                </form>
+            </div>
+        </div>
         <script>
             $(document).ready(function(){
                 var count_action = 0;
                 $("#add_action").on("click", function(){
                     count_action += 1;
-                    $("<input/>").attr({ type: "text", placeholder: "Enter sequence number of action #"+count_action, name: "seq_"+count_action}).appendTo("#action").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "text", placeholder: "Enter description of action #"+count_action, name: "desc_"+count_action}).appendTo("#action").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "number", placeholder: "Enter number of cameras of action #"+count_action, name: "cameras_"+count_action}).appendTo("#action").wrap($("<div/>"));
-                    $("<input/>").attr({ type: "number", placeholder: "Enter estimated time of action #"+count_action+" in minutes", name: "est_"+count_action}).appendTo("#action").wrap($("<div/>"));
+                    if (count_action > 1) {
+                        $("<div/>").attr({class: "line"}).appendTo("#action");
+                    }
+                    $("<input/>").attr({ type: "text", name: "seq_"+count_action}).appendTo("#action").wrap($("<p>Enter sequence number of action #"+count_action+"<p/>"));
+                    $("<input/>").attr({ type: "text", name: "desc_"+count_action}).appendTo("#action").wrap($("<p>Enter description of action #"+count_action+"<p/>"));
+                    $("<input/>").attr({ type: "number", name: "cameras_"+count_action}).appendTo("#action").wrap($("<p>Enter number of cameras of action #"+count_action+"<p/>"));
+                    $("<input/>").attr({ type: "number", name: "est_"+count_action}).appendTo("#action").wrap($("<p>Enter estimated time of action #"+count_action+" in minutes<p/>"));
                 });
             })
         </script>
