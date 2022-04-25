@@ -170,8 +170,11 @@ def eventcontinue():
 @app.route('/voting-start', methods =["GET", "POST"])
 def votingstart():
     if request.method == "POST":
-        session["voting_id"] = db_tool.insert_voting(request.form)
-        return redirect(url_for('votingcontestant'))
+        if "submit" in request.form:
+            session["voting_id"] = db_tool.insert_voting(request.form)
+            return redirect(url_for('votingcontestant'))
+        elif "back" in request.form:
+            return redirect(url_for('home'))
     else:
         return render_template("votingstart.html")
 
