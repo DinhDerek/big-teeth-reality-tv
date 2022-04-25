@@ -196,7 +196,7 @@ class DBTool:
 
     def insert_votingcontestant(self, voting_id, voting_info):
         self.cursor.execute("ALTER TABLE voting_contestants AUTO_INCREMENT=1")
-        num_votes = (len(voting_info) - 2) // 5
+        num_votes = (len(voting_info) - 1) // 5
         if num_votes == 0:
             return 0
         else:
